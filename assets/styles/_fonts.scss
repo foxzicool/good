@@ -1,0 +1,26 @@
+@font-face {
+  font-family: 'Gotham-Bold';
+  src: url('/fonts/Gotham-Bold.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Noto-Sans';
+  src: url('/fonts/Noto-Sans-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Noto-Sans-CJK-TC';
+  src: url('/fonts/Noto-Sans-CJK-TC-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+$body-font-family: 'Noto-Sans', 'Noto-Sans-CJK-TC';
+$heading-font-family: 'Gotham-Bold';

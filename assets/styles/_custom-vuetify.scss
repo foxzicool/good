@@ -1,0 +1,6 @@
+@use './fonts';
+
+@forward 'vuetify' with (
+  $body-font-family: fonts.$body-font-family,
+  $heading-font-family: fonts.$heading-font-family
+);

@@ -1,0 +1,67 @@
+name: Upload Preview Build to Cloudflare Pages
+
+on:
+  workflow_call:
+    inputs:
+      pr_number:
+        description: Pull request number for workflow to comment on
+        required: true
+        type: string
+
+      cf_project_name:
+        description: Cloudflare project name
+        required: true
+        type: string
+
+    secrets:
+      cf_api_token:
+        description: Cloudflare API token
+        required: true
+
+      cf_account_id:
+        description: Cloudflare account ID
+        required: true
+
+env:
+  NODE_VERSION: 20.x
+  ENV: production
+
+jobs:
+  build_and_deploy_preview:
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'yarn'
+
+      - name: Setup
+        run: yarn install --frozen-lockfile
+
+      - name: Build project
+        run: NITRO_PRESET=cloudflare_pages yarn nuxi build
+        env:
+          NUXT_PUBLIC_GA_MEASUREMENT_ID: ${{ vars.PREVIEW_GA_MEASUREMENT_ID }}
+
+      - name: Deploy to Cloudflare Pages
+        id: deployment
+        uses: cloudflare/pages-action@v1
+        with:
+          projectName: ${{ inputs.cf_project_name }}
+          apiToken: ${{ secrets.cf_api_token }}
+          accountId: ${{ secrets.cf_account_id }}
+          directory: ./dist
+          wranglerVersion: '3'
+
+      - name: Comment Site URL to PR
+        uses: thollander/actions-comment-pull-request@v2
+        with:
+          message: |
+            Preview build for PR#${{ inputs.pr_number }} is now available at ${{ steps.deployment.outputs.url }}.
+          pr_number: ${{ inputs.pr_number }}
+          comment_tag: deployment_result

@@ -1,0 +1,17 @@
+@use './fonts';
+@use './custom-vuetify';
+
+//#region default fonts; in case there are any non-Vuetify elements used in the project
+body {
+  font-family: fonts.$body-font-family;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: fonts.$heading-font-family;
+}
+//#endregion

@@ -1,0 +1,41 @@
+name: Build and Publish to Cloudflare Pages
+
+on:
+  workflow_run:
+    workflows: [CI]
+    branches: main
+    types:
+      - completed
+
+env:
+  NODE_VERSION: 20.x
+  ENV: production
+
+jobs:
+  build_and_publish:
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'yarn'
+      - name: Setup
+        run: yarn install --frozen-lockfile
+      - name: Build project
+        run: NITRO_PRESET=cloudflare_pages yarn nuxi build
+        env:
+          NUXT_PUBLIC_GA_MEASUREMENT_ID: ${{ vars.PROD_GA_MEASUREMENT_ID }}
+      - name: Publish to Cloudflare Pages
+        uses: cloudflare/pages-action@v1
+        with:
+          projectName: ${{ vars.CLOUDFLARE_PROJECT_NAME }}
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          directory: ./dist
+          wranglerVersion: '3'
