@@ -38,7 +38,6 @@
                       </v-list-item-title>
                     </v-list-item-content>
                     <template #append>
-                      <!-- 确保 :icon 的值正确传递 -->
                       <ThIcon v-if="subItem.subItems?.length && subItem.icon" :icon="subItem.icon" />
                     </template>
                     <v-menu v-if="subItem.subItems?.length" open-on-hover activator="parent" submenu>
