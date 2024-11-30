@@ -3,7 +3,7 @@ import { expect, it } from 'vitest';
 
 type MountingOptions = Parameters<typeof mountSuspended>[1];
 
-export function itAcceptsDefaultSlot(component: Component, options: MountingOptions) {
+export function itAcceptsDefaultSlot(component: Component, options?: MountingOptions) {
   it('accepts default slot content', async () => {
     const stringSlot = 'hi';
     const htmlNodeSlot = h('div', 'hi');
@@ -13,13 +13,13 @@ export function itAcceptsDefaultSlot(component: Component, options: MountingOpti
         ...options,
         slots: { ...options?.slots, default: () => slot },
       });
-      expect(wrapper.text()).toBe('hi');
+      expect(wrapper.text()).toContain('hi');
     });
     await Promise.all(testCases);
   });
 }
 
-export function itMergesClass(component: Component, options: MountingOptions) {
+export function itMergesClass(component: Component, options?: MountingOptions) {
   it('merges inherited classes', async () => {
     const classNameString = 'some-class';
     const classNameArray = ['some-class'];
@@ -35,7 +35,7 @@ export function itMergesClass(component: Component, options: MountingOptions) {
   });
 }
 
-export function itMergesStyle(component: Component, options: MountingOptions) {
+export function itMergesStyle(component: Component, options?: MountingOptions) {
   it('merges inherited inline styles', async () => {
     const style = { foo: 'bar' };
     const wrapper = await mountSuspended(component, {

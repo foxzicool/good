@@ -16,7 +16,7 @@
     "preview": "nuxt preview",
     "prepare": "husky",
     "postinstall": "nuxt prepare",
-    "storybook": "storybook dev -p 6006"
+    "storybook": "VITE_CJS_IGNORE_WARNING=true storybook dev -p 6006"
   },
   "dependencies": {
     "@nuxtjs/strapi": "^2.0.0",
