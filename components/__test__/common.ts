@@ -1,5 +1,4 @@
 import { mountSuspended } from '@nuxt/test-utils/runtime';
-import { expect, it } from 'vitest';
 
 type MountingOptions = Parameters<typeof mountSuspended>[1];
 

@@ -1,4 +1,3 @@
-import { afterAll, describe, expect, it, vi } from 'vitest';
 import { useHead } from '@unhead/vue';
 import useGoogleAnalytics from './useGoogleAnalytics';
 

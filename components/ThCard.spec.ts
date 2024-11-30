@@ -1,5 +1,4 @@
 import { mountSuspended } from '@nuxt/test-utils/runtime';
-import { describe, expect, it } from 'vitest';
 import ThCard from './ThCard.vue';
 import * as common from './__test__/common';
 

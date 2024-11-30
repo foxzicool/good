@@ -1,4 +1,3 @@
-import { describe } from 'vitest';
 import ThIcon from './ThIcon.vue';
 import * as common from '../__test__/common';
 import type { ThIconProps } from '../types';

@@ -1,4 +1,3 @@
-import { describe } from 'vitest';
 import ThImage from './ThImage.vue';
 import * as common from './__test__/common';
 

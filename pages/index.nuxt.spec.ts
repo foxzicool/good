@@ -1,4 +1,3 @@
-import { expect, it } from 'vitest';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import Index from '@/pages/index.vue';
 

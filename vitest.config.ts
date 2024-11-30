@@ -3,6 +3,7 @@ import { defineVitestConfig } from '@nuxt/test-utils/config';
 
 export default defineVitestConfig({
   test: {
+    globals: true,
     exclude: [...configDefaults.exclude, '.features-gen'],
     environment: 'nuxt',
     environmentOptions: {

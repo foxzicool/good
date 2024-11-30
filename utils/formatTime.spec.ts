@@ -1,4 +1,3 @@
-import { describe, expect, it } from 'vitest';
 import formatTime from './formatTime';
 
 describe('formatTime function with dynamic times', () => {

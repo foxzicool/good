@@ -1,4 +1,3 @@
-import { describe } from 'vitest';
 import ThTypography from './ThTypography.vue';
 import * as common from './__test__/common';
 

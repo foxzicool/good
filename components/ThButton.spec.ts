@@ -1,5 +1,4 @@
 import { mountSuspended } from '@nuxt/test-utils/runtime';
-import { describe, expect, it } from 'vitest';
 import ThButton from './ThButton.vue';
 import * as common from './__test__/common';
 import type { icons } from './icon';

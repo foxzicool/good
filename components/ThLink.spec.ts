@@ -1,4 +1,3 @@
-import { describe } from 'vitest';
 import ThLink from './ThLink.vue';
 import * as common from './__test__/common';
 

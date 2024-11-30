@@ -1,4 +1,3 @@
-import { describe } from 'vitest';
 import * as common from '../__test__/common';
 import ThContainer from './ThContainer.vue';
 import ThRow from './ThRow.vue';
