@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <title>Dynamic Scroll Animation</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+    
+    #hero {
+      height: 100vh;
+      width: 100%;
+      background-image: url('https://thehope.co/wp-content/uploads/2024/11/all-generation-misnistry-02.jpg');
+      background-size: cover;
+      background-attachment: fixed;
+      transition: transform 0.3s ease-out;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #hero-text {
+      color: rgb(221, 23, 23);
+      text-align: center;
+      font-size: 84px;
+      font-family: Arial, sans-serif;
+      position: fixed;
+      width: 100%;
+      bottom: 20px;
+      pointer-events: none; /* Allow clicking through the text */
+      transition: font-size 0.3s ease-out; /* Smooth transition for font size changes */
+    }
+
+    .image-container {
+      position: relative;
+      width: 800px;
+      height: auto;
+      margin: auto;
+      top: 100px;
+    }
+
+    .image-container img {
+      position: absolute;
+      width: 100px;
+      height: auto;
+      transition: transform 0.3s ease-out;
+    }
+    
+    .item1 { top: 257px; left: 55px; }
+    .item2 { top: 80px; right: 32px; }
+    .item4 { top: 175px; }
+    .item5 { top: 35px; right: 50px; }
+    .item6 { top: 325px; right: 105px; }
+    .item7 { left: 159px; }
+  </style>
+</head>
+<body>
+  <div id="hero"></div>
+  <div id="hero-text">
+    歡迎回家<br>
+    Welcome Home
+  </div>
+  <div class="image-container">
+    <img src="https://thehope.co/wp-content/uploads/2024/11/all-generation-misnistry-02.jpg" alt="Image 1" class="item1">
+    <img src="https://thehope.co/wp-content/uploads/2024/11/all-generation-misnistry-20.jpg" alt="Image 2" class="item2">
+    <img src="https://thehope.co/wp-content/uploads/2024/11/all-generation-misnistry-02.jpg" alt="Image 4" class="item4">
+    <img src="https://thehope.co/wp-content/uploads/2024/11/all-generation-misnistry-20.jpg" alt="Image 5" class="item5">
+    <img src="https://thehope.co/wp-content/uploads/2024/11/all-generation-misnistry-05.jpg" alt="Image 6" class="item6">
+    <img src="https://thehope.co/wp-content/uploads/2024/11/all-generation-misnistry-02.jpg" alt="Image 7" class="item7">
+  </div>
+  <script>
+    window.addEventListener('scroll', function() {
+      var scrollHeight = window.pageYOffset;
+      var windowHeight = window.innerHeight;
+      var documentHeight = document.documentElement.scrollHeight;
+
+      var maxScroll = documentHeight - windowHeight;
+      var scrollRatio = scrollHeight / maxScroll;
+
+      var minScale = 0.110996;
+      var maxFontSize = 154; // Maximum font size
+      var minFontSize = 24; // Minimum font size
+
+      var scale = 1 - (1 - minScale) * scrollRatio;
+      var fontSize = minFontSize + (maxFontSize - minFontSize) * scrollRatio;
+      fontSize = Math.min(maxFontSize, fontSize); // Ensure it does not exceed the maximum
+
+      document.getElementById('hero').style.transform = `scale(${scale})`;
+      document.getElementById('hero-text').style.fontSize = `${fontSize}px`;
+
+      var items = document.querySelectorAll('.image-container img');
+      items.forEach(function(item) {
+        var boundingRect = item.getBoundingClientRect();
+        var translateY = Math.max(0, (window.innerHeight - boundingRect.top) * 0.5);
+        item.style.transform = `translateY(-${translateY}px)`;
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <title>Combined Effects</title>
+</head>
+<body>
+  <div id="hero" style="background-image: url('https://thehope.co/wp-content/uploads/2024/11/all-generation-misnistry-02.jpg');">
+    <!-- 主视觉内容 -->
+  </div>
+  <div id="next-section">
+    <!-- 下一区段内容 -->
+  </div>
+  <div class="image-container">
+    <img src="https://thehope.co/wp-content/uploads/2024/11/all-generation-misnistry-02.jpg" alt="Image 1" class="item1">
+    <img src="https://thehope.co/wp-content/uploads/2024/11/all-generation-misnistry-20.jpg" alt="Image 2" class="item2">
+    <img src="https://thehope.co/wp-content/uploads/2024/11/all-generation-misnistry-02.jpg" alt="Image 4" class="item4">
+    <img src="https://thehope.co/wp-content/uploads/2024/11/all-generation-misnistry-20.jpg" alt="Image 5" class="item5">
+    <img src="https://thehope.co/wp-content/uploads/2024/11/all-generation-misnistry-05.jpg" alt="Image 6" class="item6">
+    <img src="https://thehope.co/wp-content/uploads/2024/11/all-generation-misnistry-02.jpg" alt="Image 7" class="item7">
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
+<style>
+  body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+  
+  #hero {
+    height: 100vh;
+    width: 100%;
+    background-size: cover;
+    background-attachment: fixed;
+    transition: transform 0.3s ease-out;
+  }
+  
+  #next-section {
+    height: 100vh;
+    background: #f0f0f0;
+  }
+  
+  .top-image-container {
+    width: 920px;
+    height: 1080px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .top-image {
+    width: 100%;
+    height: auto;
+  }
+  
+  .image-container {
+    position: relative;
+    width: 800px;
+    height: 600px;
+    left: 555px;
+  }
+  
+  .item1, .item2, .item4, .item5, .item6, .item7 {
+    position: absolute;
+    width: 100px;
+    height: auto;
+  }
+  
+  .item1 { top: 257px; left: 55px; }
+  .item2 { top: 80px; right: 32px; }
+  .item4 { top: 175px; }
+  .item5 { top: 35px; right: 50px; }
+  .item6 { top: 325px; right: 105px; }
+  .item7 { left: 159px; }
+  
+</style>
+<script>
+  window.addEventListener('scroll', function() {
+    var scrollPosition = window.pageYOffset;
+    var scaleSize = 1 - Math.min(scrollPosition / window.innerHeight, 0.4);  // 最多缩小40%
+    document.getElementById('hero').style.transform = `scale(${scaleSize})`;
+  
+    var parallaxItems = document.querySelectorAll('.parallax-item');
+    parallaxItems.forEach(function(item, index) {
+      if (item.getBoundingClientRect().top < window.innerHeight) {
+        item.style.opacity = 1;  // 当元素进入视窗时变为可见
+      }
+    });
+  });
+  
+</script>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parallax and Shrink Effect</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div id="hero" style="background-image: url('https://thehope.co/wp-content/uploads/2024/11/all-generation-misnistry-02.jpg');">
+  <!-- 主視覺內容 -->
+</div>
+<div id="next-section">
+  <!-- 下一區段內容 -->
+</div>
+
+<div id="parallax-container">
+  <div class="parallax-item" style="background-image: url('https://thehope.co/wp-content/uploads/2024/11/all-generation-misnistry-02.jpg');">Text 1</div>
+  <div class="parallax-item" style="background-image: url('https://thehope.co/wp-content/uploads/2024/11/all-generation-misnistry-20.jpg');">Text 2</div>
+  <div class="parallax-item" style="background-image: url('https://thehope.co/wp-content/uploads/2024/11/all-generation-misnistry-05.jpg');">Text 3</div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
+<style>
+    body, html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+      }
+      
+      #hero {
+        height: 100vh;
+        width: 100%;
+        background-size: cover;
+        background-attachment: fixed;
+        transition: transform 0.3s ease-out;
+      }
+      
+      #next-section {
+        height: 100vh;
+        background: #f0f0f0;
+      }
+      
+      #parallax-container {
+        perspective: 1px;
+        overflow-x: hidden;
+        overflow-y: auto;
+        position: relative;
+      }
+      
+      .parallax-item {
+        position: relative;
+        background-size: cover;
+        background-attachment: fixed;
+        height: 300px;
+        opacity: 0;
+        transition: opacity 0.5s ease-out;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 24px;
+        font-family: Arial, sans-serif;
+      }
+      
+</style>
+<script>
+    window.addEventListener('scroll', function() {
+        var scrollPosition = window.pageYOffset;
+        var scaleSize = 1 - Math.min(scrollPosition / window.innerHeight, 0.4);  // 最多縮小40%
+        document.getElementById('hero').style.transform = `scale(${scaleSize})`;
+      
+        var parallaxItems = document.querySelectorAll('.parallax-item');
+        parallaxItems.forEach(function(item, index) {
+          if (item.getBoundingClientRect().top < window.innerHeight) {
+            item.style.opacity = 1;  // 當元素進入視窗時變為可見
+          }
+        });
+      });
+      
+</script>
